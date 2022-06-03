@@ -233,6 +233,9 @@ p<-ggplot(data, aes(x=os, y=ratings, fill=os)) +
   theme(plot.title = element_text(hjust = 0.5))
 p
 
+
+
+### wykresy gęstości
 maindf = data
 
 library(e1071)
