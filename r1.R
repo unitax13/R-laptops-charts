@@ -1,7 +1,5 @@
 ### Data source:  kaggle/2022-march-laptop-data
 
-
-setwd("C:/Users/Jacek/Downloads")
 data = read.csv("Cleaned_Laptop_data.csv", header = TRUE)
 x = data.frame(data)
 str(data)
@@ -20,7 +18,7 @@ points(data$latest_price, data$display_size,col='black')
 box()
 axis(1,)
 
-ggplot(data=x, mapping = aes(x = latest_price, y=display_size)) + geom_point(aes(color = processor_brand)) + labs(title="siema")
+ggplot(data=x, mapping = aes(x = latest_price, y=display_size)) + geom_point(aes(color = processor_brand)) + labs(title="title")
 
 unique(data$display_size)
 
@@ -234,4 +232,30 @@ p<-ggplot(data, aes(x=os, y=ratings, fill=os)) +
               caption = "Źródło:  kaggle/2022-march-laptop-data")+
   theme(plot.title = element_text(hjust = 0.5))
 p
+
+maindf = data
+
+library(e1071)
+
+par(mfrow=c(2, 2)) 
+
+plot(density(maindf$latest_price), main="Density Plot: latest_price", ylab="Frequency",
+     sub=paste("Skewness:", round(e1071::skewness(maindf$latest_price), 2)))  
+polygon(density(maindf$latest_price), col="green")
+
+
+plot(density(maindf$ratings), main="Density Plot: ratings", ylab="Frequency",
+     sub=paste("Skewness:", round(e1071::skewness(maindf$ratings), 2)))  
+polygon(density(maindf$ratings), col="green")
+
+plot(density(maindf$reviews), main="Density Plot: reviews", ylab="Frequency",
+     sub=paste("Skewness:", round(e1071::skewness(maindf$reviews), 2)))  
+polygon(density(maindf$reviews), col="orange")
+
+plot(density(maindf$star_rating), main="Density Plot: star_rating", ylab="Frequency",
+     sub=paste("Skewness:", round(e1071::skewness(maindf$star_rating), 2)))  
+polygon(density(maindf$star_rating), col="green")
+
+
+
 
